@@ -75,3 +75,63 @@ def user_view():
 @admin.route("/comment/list/")
 def comment_list():
     return render_template("admin/comment_list.html")
+
+
+# 收藏
+@admin.route("/moviecol/list/")
+def moviecol_list():
+    return render_template("admin/moviecol_list.html")
+
+
+# 操作日志列表
+@admin.route("/oplog/list/")
+def oplog_list():
+    return render_template("admin/oplog_list.html")
+
+
+# 管理员登录日志
+@admin.route("/adminloginlog_list/list/")
+def adminloginlog_list():
+    return render_template("admin/adminloginlog_list.html")
+
+
+# 会员登录日志
+@admin.route("/userloginlog_list/list/")
+def userloginlog_list():
+    return render_template("admin/userloginlog_list.html")
+
+
+# 权限添加
+@admin.route("/auth/add/")
+def auth_add():
+    return render_template("admin/auth_add.html")
+
+
+# 权限列表
+@admin.route("/auth/list/")
+def auth_list():
+    return render_template("admin/auth_list.html")
+
+
+# 角色添加
+@admin.route("/role/add/")
+def role_add():
+    return render_template("admin/role_add.html")
+
+
+# 角色管理
+@admin.route("/role/list/")
+def role_list():
+    return render_template("admin/role_list.html")
+
+
+# 管理员添加
+@admin.route("/admin/add/")
+def admin_add():
+    return render_template("admin/admin_add.html")
+
+
+# 管理员列表
+@admin.route("/admin/list/")
+def admin_list():
+    return render_template("admin/admin_list.html")
