@@ -499,3 +499,84 @@ def preview_list():
 def comment_list():
     return render_template("admin/comment_list.html")
 ```
+#### 管理收藏界面搭建
+```
+# 收藏
+@admin.route("/moviecol/list/")
+def moviecol_list():
+    return render_template("admin/moviecol_list.html")
+```
+
+#### 操作日志界面搭建
+```
+
+# 操作日志列表
+@admin.route("/oplog/list/")
+def oplog_list():
+    return render_template("admin/oplog_list.html")
+
+
+# 管理员登录日志
+@admin.route("/adminloginlog_list/list/")
+def adminloginlog_list():
+    return render_template("admin/adminloginlog_list.html")
+
+
+# 会员登录日志
+@admin.route("/userloginlog_list/list/")
+def userloginlog_list():
+    return render_template("admin/userloginlog_list.html")
+
+```
+
+#### 权限操作界面搭建
+```
+# 权限添加
+@admin.route("/auth/add/")
+def auth_add():
+    return render_template("admin/auth_add.html")
+
+
+# 权限列表
+@admin.route("/auth/list/")
+def auth_list():
+    return render_template("admin/auth_list.html")
+
+```
+#### 角色界面搭建
+```
+# 角色添加
+@admin.route("/role/add/")
+def role_add():
+    return render_template("admin/role_add.html")
+
+
+# 角色管理
+@admin.route("/role/list/")
+def role_list():
+    return render_template("admin/role_list.html")
+
+```
+
+#### 管理员界面搭建
+```
+# 管理员添加
+@admin.route("/admin/add/")
+def admin_add():
+    return render_template("admin/admin_add.html")
+
+
+# 管理员列表
+@admin.route("/admin/list/")
+def admin_list():
+    return render_template("admin/admin_list.html")
+
+```
+
+### 管理员登录
+* 1、app/__init__.py中创建db对象
+* 2、app/models.py中导入db对象
+* 3、app/admin/forms.py中定义表单验证
+* 4、app/templates/admin/login.html中使用表单字段、信息验证、消息闪现
+* 5、app/admin/views.py中处理登录请求、保存会话
+* 6、app/admin/views.py中定义登录装饰器、访问控制

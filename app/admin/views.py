@@ -26,11 +26,15 @@ def index():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
+        # 获取表单数据
         data = form.data
+        # 根据表单传递过来的账户查询账户
         admin = Admin.query.filter_by(name=data["account"]).first()
+        # 如果查看密码否正确
         if not admin.check_pwd(data["pwd"]):
             flash("密码错误！")
             return redirect("admin/login")
+        # 如果密码正确了session就保存数据
         session["admin"] = data["account"]
         return redirect(request.args.get("next") or url_for("admin.index"))
     return render_template("admin/login.html", form=form)
