@@ -1,13 +1,6 @@
 # coding=utf8
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-
-app = Flask(__name__)
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql://root:root@localhost/movie"
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
-db = SQLAlchemy(app)
+from app import db
 
 
 # 会员
@@ -153,6 +146,10 @@ class Admin(db.Model):
     def __repr__(self):
         return "<Admin % r>" % self.name
 
+    def check_pwd(self, pwd):
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.pwd, pwd)
+
 
 # 登录日志模型
 class AdminLog(db.Model):
@@ -190,11 +187,12 @@ if __name__ == '__main__':
     # db.session.add(role)
     # db.session.commit()
     # 插入管理员
-    from werkzeug.security import  generate_password_hash
+    from werkzeug.security import generate_password_hash
+
     admin = Admin(
         name="ruolan",
         pwd=generate_password_hash("123456asd"),
-        role_id = 1
+        role_id=1
     )
     db.session.add(admin)
     db.session.commit()
