@@ -21,3 +21,27 @@ def logout():
 @admin.route("/pwd/")
 def pwd():
     return render_template("admin/pwd.html")
+
+
+# 编辑标签
+@admin.route("/tag/add/")
+def tag_add():
+    return render_template("admin/tag_add.html")
+
+
+# 标签列表
+@admin.route("/tag/list/")
+def tag_list():
+    return render_template("admin/tag_list.html")
+
+
+# 编辑电影
+@admin.route("/movie/add/")
+def movie_add():
+    return render_template("admin/movie_add.html")
+
+
+# 电影列表
+@admin.route("/movie/list/")
+def movie_list():
+    return render_template("admin/movie_list.html")
