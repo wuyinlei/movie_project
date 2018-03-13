@@ -1,11 +1,13 @@
 # coding=utf8
 from . import admin
 from flask import render_template, redirect, url_for, flash, session, request
-from app.admin.forms import LoginForm
-from app.models import Admin
+from app.admin.forms import LoginForm, TagForm
+from app.models import Admin, Tag
 from functools import wraps
+from app import db
 
 
+# 定义登录装饰器 用于在需要的接口上 比如这个装饰器是为了防止在未登录的状态下 不能随意游览需要登录状态的网页
 def admin_login_req(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -53,11 +55,25 @@ def pwd():
     return render_template("admin/pwd.html")
 
 
-# 编辑标签
-@admin.route("/tag/add/")
+# 添加标签
+@admin.route("/tag/add/", methods=["GET", "POST"])
 @admin_login_req
 def tag_add():
-    return render_template("admin/tag_add.html")
+    form = TagForm()
+    if form.validate_on_submit():
+        data = form.data
+        tag = Tag.query.filter_by(name=data["name"]).count()
+        if tag == 1:
+            flash("该标签已经存在,请重新编辑！", "err")
+            return redirect(url_for("admin.tag_add"))
+        tag = Tag(
+            name=data["name"]
+        )
+        db.session.add(tag)
+        db.session.commit()
+        flash("添加标签成功！", "ok")
+        redirect(url_for("admin.tag_add"))
+    return render_template("admin/tag_add.html", form=form)
 
 
 # 标签列表
