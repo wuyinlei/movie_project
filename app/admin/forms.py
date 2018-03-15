@@ -168,7 +168,7 @@ class MovieForm(FlaskForm):
         }
     )
 
-    release_time = DateTimeField(
+    release_time = StringField(
         label="上映时间",
         validators=[
             DataRequired("请选择上映时间！")
